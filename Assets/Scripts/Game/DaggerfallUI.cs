@@ -75,7 +75,7 @@ namespace DaggerfallWorkshop.Game
         DaggerfallHUD dfHUD;
         DaggerfallPauseOptionsWindow dfPauseOptionsWindow;
         DaggerfallCharacterSheetWindow dfCharacterSheetWindow;
-        DaggerfallInventoryWindow dfInventoryWindow;
+		DaggerfallUnityInventoryWindow dfInventoryWindow;
         DaggerfallControlsWindow dfControlsWindow;
         DaggerfallJoystickControlsWindow dfJoystickControlsWindow;
         DaggerfallUnityMouseControlsWindow dfUnityMouseControlsWindow;
@@ -142,7 +142,7 @@ namespace DaggerfallWorkshop.Game
             get { return dfHUD; }
         }
 
-        public DaggerfallInventoryWindow InventoryWindow
+		public DaggerfallUnityInventoryWindow InventoryWindow
         {
             get { return dfInventoryWindow; }
         }
@@ -202,7 +202,7 @@ namespace DaggerfallWorkshop.Game
 
             dfPauseOptionsWindow = new DaggerfallPauseOptionsWindow(uiManager);
             dfCharacterSheetWindow = new DaggerfallCharacterSheetWindow(uiManager);
-            dfInventoryWindow = new DaggerfallInventoryWindow(uiManager);
+			dfInventoryWindow = new DaggerfallUnityInventoryWindow(uiManager);
             dfControlsWindow = new DaggerfallControlsWindow(uiManager);
             dfJoystickControlsWindow = new DaggerfallJoystickControlsWindow(uiManager);
             dfUnityMouseControlsWindow = new DaggerfallUnityMouseControlsWindow(uiManager);
