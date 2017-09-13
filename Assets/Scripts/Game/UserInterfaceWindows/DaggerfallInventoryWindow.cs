@@ -904,11 +904,11 @@ namespace DaggerfallWorkshop.Game.UserInterfaceWindows
 
                 // Tooltip text
                 string text;
-                if (item.ItemGroup == ItemGroups.Books)
+				if (item.ItemGroup == ItemGroups.Books)
                 {
                     text = DaggerfallUnity.Instance.ItemHelper.getBookNameByMessage(item.message, item.LongName);
                 } else {
-                    text = item.LongName;
+					text = item.LongNameAndData;
                 }
                 localItemsButtons[i].ToolTipText = text;
             }
@@ -957,7 +957,7 @@ namespace DaggerfallWorkshop.Game.UserInterfaceWindows
                     remoteItemsStackLabels[i].Text = item.stackCount.ToString();
 
                 // Tooltip text
-                remoteItemsButtons[i].ToolTipText = item.LongName;
+				remoteItemsButtons[i].ToolTipText = item.LongNameAndData;
             }
         }
 
@@ -1732,8 +1732,8 @@ namespace DaggerfallWorkshop.Game.UserInterfaceWindows
                 if (value >= 0 && value < ItemEquipTable.EquipTableLength)
                 {
                     DaggerfallUnityItem item = playerEntity.ItemEquipTable.EquipTable[value];
-                    if (item != null)
-                        text = item.LongName;
+					if (item != null)
+						text = item.LongNameAndData;
                 }
 
                 // Update tooltip text

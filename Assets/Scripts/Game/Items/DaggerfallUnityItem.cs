@@ -185,6 +185,26 @@ namespace DaggerfallWorkshop.Game.Items
             get { return DaggerfallUnity.Instance.ItemHelper.ResolveItemLongName(this); }
         }
 
+		///<summary>
+		/// Resolve this item's interesting data in a formatted text(for item tooltips).
+		/// </summary>
+		public string LongNameAndData
+		{
+			get {
+				string[] description = new String[4];
+				description[0] = LongName;
+				if (itemGroup == ItemGroups.Armor) {
+					description[1] = "Armor Rating: " + GetMaterialArmorValue();
+				} else if (itemGroup == ItemGroups.Weapons) {
+					description[1] = "Damage: " + GetBaseDamageMin() + "-" + GetBaseDamageMax();
+				}
+				// Find other interesting data for other item groups. For now it's a blank line.
+				description[2] = "Condition: " + currentCondition + "/" + maxCondition;
+				description[3] = "Weight: " + weightInKg + " Kg";
+				return String.Join("\r", description);
+			}
+		}
+
         /// <summary>
         /// Gets temp equip slot.
         /// </summary>
