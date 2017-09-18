@@ -696,7 +696,6 @@ namespace DaggerfallWorkshop
         /// </summary>
         public static void DoorText(GameObject triggerObj, DaggerfallAction thisAction)
         {
-            PlayerInfoLook lol = GameManager.Instance.PlayerInfoLook;
             if (GameManager.Instance.PlayerActivate.CurrentMode == PlayerActivateModes.Info)
             {
                 if (thisAction.Index != 0)
