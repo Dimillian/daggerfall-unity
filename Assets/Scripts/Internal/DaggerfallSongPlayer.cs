@@ -213,7 +213,7 @@ namespace DaggerfallWorkshop
         IEnumerator PlayCustomSong(WWW www)
         {
             // Get clip
-            AudioClip clip = www.audioClip;
+            AudioClip clip = www.GetAudioClip();
 
             // Import song
             while (clip.loadState != AudioDataLoadState.Loaded)

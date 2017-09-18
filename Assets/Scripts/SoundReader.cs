@@ -75,7 +75,7 @@ namespace DaggerfallWorkshop
             {
                 // Get audio clip from sound file on disk
                 WWW customSoundFile = Utility.AssetInjection.SoundReplacement.LoadCustomSound(soundIndex);
-                clip = customSoundFile.audioClip;
+                clip = customSoundFile.GetAudioClip();
                 clip.name = name;
                 StartCoroutine(WaitForSoundFile(customSoundFile, clip));
             }

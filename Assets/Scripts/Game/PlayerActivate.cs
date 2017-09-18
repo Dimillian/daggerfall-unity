@@ -249,7 +249,7 @@ namespace DaggerfallWorkshop.Game
 
                         // Check for an action door hit
                         DaggerfallActionDoor actionDoor;
-                        if (ActionDoorCheck(hit, out actionDoor))
+                        if (HitTest.ActionDoorCheck(hit, out actionDoor))
                         {
                             // Check if close enough to activate
                             if (hit.distance > (DoorActivationDistance * MeshReader.GlobalScale))
@@ -268,7 +268,7 @@ namespace DaggerfallWorkshop.Game
 
                         // Check for action record hit
                         DaggerfallAction action;
-                        if (ActionCheck(hit, out action))
+                        if (HitTest.ActionCheck(hit, out action))
                         {
                             if (hit.distance <= (DefaultActivationDistance * MeshReader.GlobalScale))
                             {
@@ -278,7 +278,7 @@ namespace DaggerfallWorkshop.Game
 
                         // Check for lootable object hit
                         DaggerfallLoot loot;
-                        if (LootCheck(hit, out loot))
+                        if (HitTest.LootCheck(hit, out loot))
                         {
                             switch (currentMode)
                             {
@@ -330,7 +330,7 @@ namespace DaggerfallWorkshop.Game
 
                         // Check for static NPC hit
                         StaticNPC npc;
-                        if (NPCCheck(hit, out npc))
+                        if (HitTest.NPCCheck(hit, out npc))
                         {
                             switch (currentMode)
                             {
@@ -352,7 +352,7 @@ namespace DaggerfallWorkshop.Game
 
                         // Check for mobile NPC hit
                         MobilePersonNPC mobileNpc = null;
-                        if (MobilePersonMotorCheck(hit, out mobileNpc))
+                        if (HitTest.MobilePersonMotorCheck(hit, out mobileNpc))
                         {
                             switch (currentMode)
                             {
@@ -383,7 +383,7 @@ namespace DaggerfallWorkshop.Game
 
                         // Check for mobile enemy hit
                         DaggerfallEntityBehaviour mobileEnemyBehaviour;
-                        if (MobileEnemyCheck(hit, out mobileEnemyBehaviour))
+                        if (HitTest.MobileEnemyCheck(hit, out mobileEnemyBehaviour))
                         {
                             EnemyEntity enemyEntity = mobileEnemyBehaviour.Entity as EnemyEntity;
                             switch (currentMode)
@@ -429,7 +429,7 @@ namespace DaggerfallWorkshop.Game
                         // Trigger general quest resource behaviour click
                         // Note: This will cause a second click on special NPCs, look into a way to unify this handling
                         QuestResourceBehaviour questResourceBehaviour;
-                        if (QuestResourceBehaviourCheck(hit, out questResourceBehaviour))
+                        if (HitTest.QuestResourceBehaviourCheck(hit, out questResourceBehaviour))
                         {
                             if (hit.distance > (DefaultActivationDistance * MeshReader.GlobalScale))
                             {
@@ -539,87 +539,6 @@ namespace DaggerfallWorkshop.Game
             }
 
             return doors;
-        }
-
-        // Check if raycast hit a static door
-        private bool StaticDoorCheck(RaycastHit hitInfo, out DaggerfallStaticDoors door)
-        {
-            door = hitInfo.transform.GetComponent<DaggerfallStaticDoors>();
-            if (door == null)
-                return false;
-
-            return true;
-        }
-
-        // Check if raycast hit an action door
-        private bool ActionDoorCheck(RaycastHit hitInfo, out DaggerfallActionDoor door)
-        {
-            door = hitInfo.transform.GetComponent<DaggerfallActionDoor>();
-            if (door == null)
-                return false;
-
-            return true;
-        }
-
-        // Check if raycast hit a generic action component
-        private bool ActionCheck(RaycastHit hitInfo, out DaggerfallAction action)
-        {
-            // Look for action
-            action = hitInfo.transform.GetComponent<DaggerfallAction>();
-            if (action == null)
-                return false;
-            else
-                return true;
-        }
-
-        // Check if raycast hit a lootable object
-        private bool LootCheck(RaycastHit hitInfo, out DaggerfallLoot loot)
-        {
-            loot = hitInfo.transform.GetComponent<DaggerfallLoot>();
-            if (loot == null)
-                return false;
-            else
-                return true;
-        }
-
-        // Check if raycast hit a StaticNPC
-        private bool NPCCheck(RaycastHit hitInfo, out StaticNPC staticNPC)
-        {
-            staticNPC = hitInfo.transform.GetComponent<StaticNPC>();
-            if (staticNPC != null)
-                return true;
-            else
-                return false;
-        }
-
-        // Check if raycast hit a mobile NPC
-        private bool MobilePersonMotorCheck(RaycastHit hitInfo, out MobilePersonNPC mobileNPC)
-        {
-            mobileNPC = hitInfo.transform.GetComponent<MobilePersonNPC>();
-            if (mobileNPC != null)
-                return true;
-            else
-                return false;
-        }
-
-        // Check if raycast hit a mobile enemy
-        private bool MobileEnemyCheck(RaycastHit hitInfo, out DaggerfallEntityBehaviour mobileEnemy)
-        {
-            mobileEnemy = hitInfo.transform.GetComponent<DaggerfallEntityBehaviour>();
-            if (mobileEnemy != null)
-                return true;
-            else
-                return false;
-        }
-
-        // Check if raycast hit a QuestResource
-        private bool QuestResourceBehaviourCheck(RaycastHit hitInfo, out QuestResourceBehaviour questResourceBehaviour)
-        {
-            questResourceBehaviour = hitInfo.transform.GetComponent<QuestResourceBehaviour>();
-            if (questResourceBehaviour != null)
-                return true;
-            else
-                return false;
         }
 
         // Check if non-house building is unlocked and enterable

@@ -62,6 +62,7 @@ namespace DaggerfallWorkshop.Game
         FloatingOrigin floatingOrigin = null;
         FPSWeapon[] playerWeapons = new FPSWeapon[2];
         PlayerActivate playerActivate = null;
+        PlayerInfoLook playerInfoLook = null;
         CharacterController playerController = null;
         SunlightManager sunlightManager = null;
         ItemHelper itemHelper = null;
@@ -239,6 +240,12 @@ namespace DaggerfallWorkshop.Game
             set { playerActivate = value; }
         }
 
+        public PlayerInfoLook PlayerInfoLook
+        {
+            get { return (playerInfoLook) ? playerInfoLook : playerInfoLook = GetComponentFromObject<PlayerInfoLook>(PlayerObject); }
+            set { playerInfoLook = value; }
+        }
+
         public CharacterController PlayerController
         {
             get { return (playerController) ? playerController : playerController = GetComponentFromObject<CharacterController>(PlayerObject); }
@@ -359,6 +366,8 @@ namespace DaggerfallWorkshop.Game
         {
             // Try to set all properties at startup
             GetProperties();
+
+             PlayerInfoLook.enabled = true;
 
             // Log welcome message
             Debug.Log("Welcome to Daggerfall Unity " + VersionInfo.DaggerfallUnityVersion);
