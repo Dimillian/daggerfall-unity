@@ -64,6 +64,7 @@ namespace DaggerfallWorkshop.Game.UserInterfaceWindows
         Checkbox leftHandWeapons;
         Checkbox playerNudity;
         Checkbox meshAndTextureReplacement;
+        Checkbox modernInfoMod;
 
         Color unselectedTextColor = new Color(0.6f, 0.6f, 0.6f, 1f);
         Color selectedTextColor = new Color(0.0f, 0.8f, 0.0f, 1.0f);
@@ -450,6 +451,7 @@ namespace DaggerfallWorkshop.Game.UserInterfaceWindows
             x = 165;
             optionPos = 20;
             meshAndTextureReplacement = AddOption(x, "Support for Graphical Mods", "Enable replacement of textures and models", DaggerfallUnity.Settings.MeshAndTextureReplacement);
+            modernInfoMod = AddOption(x, "Modern info mod", "Enable live info mod, display as you look around", DaggerfallUnity.Settings.ModernInfoMod);
             //bool exampleModCheckbox = AddOption(x, "Example", "Example built-in mod", DaggerfallUnity.Settings.ExampleModOption);
 
             // Add mod note

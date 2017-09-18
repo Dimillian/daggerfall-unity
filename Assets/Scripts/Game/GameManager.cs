@@ -366,9 +366,7 @@ namespace DaggerfallWorkshop.Game
         {
             // Try to set all properties at startup
             GetProperties();
-
-             PlayerInfoLook.enabled = true;
-
+            
             // Log welcome message
             Debug.Log("Welcome to Daggerfall Unity " + VersionInfo.DaggerfallUnityVersion);
         }

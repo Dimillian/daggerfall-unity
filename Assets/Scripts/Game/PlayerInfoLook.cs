@@ -33,12 +33,12 @@ namespace DaggerfallWorkshop.Game
 		PlayerEnterExit playerEnterExit;        // Example component to enter/exit buildings
 		GameObject mainCamera;
 
-		public bool enabled = false;
-
 		public float RayDistance = 75.0f;        // Distance of ray check, tune this to your scale and preference
 
 		// Maximum distance from which different object types can be activated, in classic distance units
 		public float DefaultLookDistance = 128;
+
+        private bool enabled = DaggerfallUnity.Settings.MeshAndTextureReplacement;
 
 		void Start()
 		{
