@@ -63,6 +63,7 @@ namespace DaggerfallWorkshop.Game
 					MobilePersonNPC mobileNPC;
 					DaggerfallEntityBehaviour enemyEntity;
                     DaggerfallActionDoor actionDoor;
+                    DaggerfallStaticDoors staticDoors;
 					if (HitTest.NPCCheck(hit, out npc))
 					{
 						DaggerfallUI.SetMidScreenText(HardStrings.youSee.Replace("%s", npc.DisplayName));
@@ -78,6 +79,10 @@ namespace DaggerfallWorkshop.Game
                     else if (HitTest.ActionDoorCheck(hit, out actionDoor)) 
                     {
                         DaggerfallUI.SetMidScreenText(HardStrings.youSee.Replace("%s", "a door"));
+                    }
+                    else if (HitTest.StaticDoorCheck(hit, out staticDoors))
+                    {
+                       DaggerfallUI.SetMidScreenText(HardStrings.youSee.Replace("%s", "an exit door"));
                     }
 					else
 					{
