@@ -38,7 +38,7 @@ namespace DaggerfallWorkshop.Game
 		// Maximum distance from which different object types can be activated, in classic distance units
 		public float DefaultLookDistance = 128;
 
-        private bool enabled = DaggerfallUnity.Settings.MeshAndTextureReplacement;
+		private bool infoModEnabled = DaggerfallUnity.Settings.ModernInfoMod;
 
 		void Start()
 		{
@@ -49,7 +49,7 @@ namespace DaggerfallWorkshop.Game
 
 		void Update()
 		{
-			if (enabled)
+			if (infoModEnabled)
 			{
 				if (mainCamera == null)
 					return;
@@ -62,8 +62,8 @@ namespace DaggerfallWorkshop.Game
 					StaticNPC npc;
 					MobilePersonNPC mobileNPC;
 					DaggerfallEntityBehaviour enemyEntity;
-                    DaggerfallActionDoor actionDoor;
-                    DaggerfallStaticDoors staticDoors;
+					DaggerfallActionDoor actionDoor;
+					DaggerfallStaticDoors staticDoors;
 					if (HitTest.NPCCheck(hit, out npc))
 					{
 						DaggerfallUI.SetMidScreenText(HardStrings.youSee.Replace("%s", npc.DisplayName));
@@ -76,14 +76,14 @@ namespace DaggerfallWorkshop.Game
 					{
 						DaggerfallUI.SetMidScreenText(HardStrings.youSee.Replace("%s", enemyEntity.Entity.Name));
 					}
-                    else if (HitTest.ActionDoorCheck(hit, out actionDoor)) 
-                    {
-                        DaggerfallUI.SetMidScreenText(HardStrings.youSee.Replace("%s", "a door"));
-                    }
-                    else if (HitTest.StaticDoorCheck(hit, out staticDoors))
-                    {
-                       DaggerfallUI.SetMidScreenText(HardStrings.youSee.Replace("%s", "an exit door"));
-                    }
+					else if (HitTest.ActionDoorCheck(hit, out actionDoor))
+					{
+						DaggerfallUI.SetMidScreenText(HardStrings.youSee.Replace("%s", "a door"));
+					}
+					else if (HitTest.StaticDoorCheck(hit, out staticDoors))
+					{
+						DaggerfallUI.SetMidScreenText(HardStrings.youSee.Replace("%s", "an exit door"));
+					}
 					else
 					{
 						DaggerfallUI.SetMidScreenText("");
