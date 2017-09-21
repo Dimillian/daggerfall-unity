@@ -444,7 +444,6 @@ namespace DaggerfallWorkshop.Game
                             }
                         }
 
-<<<<<<< HEAD
                         // Trigger general quest resource behaviour click
                         // Note: This will cause a second click on special NPCs, look into a way to unify this handling
                         QuestResourceBehaviour questResourceBehaviour;
@@ -461,8 +460,6 @@ namespace DaggerfallWorkshop.Game
                                 TriggerQuestResourceBehaviourClick(questResourceBehaviour);
                         }
 
-=======
->>>>>>> master
                         // Trigger ladder hit
                         DaggerfallLadder ladder = hit.transform.GetComponent<DaggerfallLadder>();
                         if (ladder)
