@@ -10,6 +10,7 @@
 //
 
 using System.Collections.Generic;
+using DaggerfallConnect;
 using DaggerfallConnect.Arena2;
 using DaggerfallConnect.Save;
 using DaggerfallWorkshop.Game.Banking;
@@ -133,7 +134,7 @@ namespace DaggerfallWorkshop.Game.Entity
 
         public override void Update(DaggerfallEntityBehaviour sender)
         {
-            if (playerMotor = null)
+            if (playerMotor == null)
                 playerMotor = GameManager.Instance.PlayerMotor;
 
             uint gameMinutes = DaggerfallUnity.Instance.WorldTime.DaggerfallDateTime.ToClassicDaggerfallTime();
@@ -159,7 +160,7 @@ namespace DaggerfallWorkshop.Game.Entity
                 if (!CheckedCurrentJump && playerMotor.IsJumping)
                 {
                     DecreaseFatigue(JumpingFatigueLoss);
-                    TallySkill((short)Skills.Jumping, 1);
+                    TallySkill(DFCareer.Skills.Jumping, 1);
                     CheckedCurrentJump = true;
                 }
 
@@ -287,8 +288,13 @@ namespace DaggerfallWorkshop.Game.Entity
                 DaggerfallUnityItem newItem = new DaggerfallUnityItem((ItemRecord)record);
                 if (newItem.ItemGroup == ItemGroups.MiscItems && newItem.GroupIndex == 1)
                 {
-                    TrappedSoulRecord soulRecord = (TrappedSoulRecord) record.Children[0];
-                    newItem.TrappedSoulType = (MobileTypes) soulRecord.RecordRoot.SpriteIndex;
+                    if (record.Children.Count > 0)
+                    {
+                        TrappedSoulRecord soulRecord = (TrappedSoulRecord) record.Children[0];
+                        newItem.TrappedSoulType = (MobileTypes) soulRecord.RecordRoot.SpriteIndex;
+                    }
+                    else
+                        newItem.TrappedSoulType = MobileTypes.None;
                 }
                 // Add to local inventory or wagon
                 if (containerRecord.IsWagon)
@@ -371,14 +377,28 @@ namespace DaggerfallWorkshop.Game.Entity
         /// <summary>
         /// Tally skill usage.
         /// </summary>
-        public override void TallySkill(short skillId, short amount)
+        public override void TallySkill(DFCareer.Skills skill, short amount)
         {
-            skillUses[skillId] += amount;
-            if (skillUses[skillId] > 20000)
-                skillUses[skillId] = 20000;
-            else if (skillUses[skillId] < 0)
+            int skillId = (int)skill;
+
+            try
             {
-                skillUses[skillId] = 0;
+                skillUses[skillId] += amount;
+                if (skillUses[skillId] > 20000)
+                    skillUses[skillId] = 20000;
+                else if (skillUses[skillId] < 0)
+                {
+                    skillUses[skillId] = 0;
+                }
+            }
+            catch(Exception ex)
+            {
+                string error = string.Format("Caught exception {0} with skillId {1}.", ex.Message, skillId);
+
+                if (skillUses == null || skillUses.Length == 0)
+                    error += " skillUses is null or empty.";
+
+                Debug.Log(error);
             }
         }
 
@@ -630,7 +650,7 @@ namespace DaggerfallWorkshop.Game.Entity
                 CurrentFatigue += fatigueRecoveryRate;
                 CurrentMagicka += spellPointRecoveryRate;
 
-                TallySkill((short)Skills.Medical, 1);
+                TallySkill(DFCareer.Skills.Medical, 1);
             }
             else
                 SetHealth(0);
